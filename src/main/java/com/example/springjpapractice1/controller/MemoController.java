@@ -28,4 +28,9 @@ public class MemoController {
     public ResponseEntity<MemoResponseDto> findOne(@PathVariable Long id) {
         return ResponseEntity.ok(memoService.findById(id));
     }
+
+    @PutMapping("/memos/{id}")
+    public ResponseEntity<MemoResponseDto> update(@PathVariable Long id, @RequestBody MemoRequestDto dto) {
+        return ResponseEntity.ok(memoService.update(id, dto));
+    }
 }
