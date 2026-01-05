@@ -4,10 +4,7 @@ import com.example.springjpapractice1.dto.MemoRequestDto;
 import com.example.springjpapractice1.dto.MemoResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,10 @@ public class MemoController {
     @GetMapping("/memos")
     public ResponseEntity<List<MemoResponseDto>> findAll() {
         return ResponseEntity.ok(memoService.findAll());
+    }
+
+    @GetMapping("/memos/{id}")
+    public ResponseEntity<MemoResponseDto> findOne(@PathVariable Long id) {
+        return ResponseEntity.ok(memoService.findById(id));
     }
 }

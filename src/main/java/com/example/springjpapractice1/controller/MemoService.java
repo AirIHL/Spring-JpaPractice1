@@ -6,6 +6,7 @@ import com.example.springjpapractice1.entity.Memo;
 import com.example.springjpapractice1.repository.MemoRepository;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.Nullable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,5 +35,13 @@ public class MemoService {
             dtos.add(new MemoResponseDto(memo.getId(), memo.getTitle(), memo.getContent()));
         }
         return dtos;
+    }
+
+    @Transactional(readOnly = true)
+    public MemoResponseDto findById(Long id) {
+        Memo memo = memoRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 id에 맞는 메모가 없습니다.")
+        );
+        return new MemoResponseDto(memo.getId(), memo.getTitle(), memo.getContent());
     }
 }
