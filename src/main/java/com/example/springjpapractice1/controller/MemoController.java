@@ -33,4 +33,10 @@ public class MemoController {
     public ResponseEntity<MemoResponseDto> update(@PathVariable Long id, @RequestBody MemoRequestDto dto) {
         return ResponseEntity.ok(memoService.update(id, dto));
     }
+
+    @DeleteMapping("memos/{id}")
+    public void delete(@PathVariable Long id) {
+        memoService.deleteById(id);
+    }
 }
+

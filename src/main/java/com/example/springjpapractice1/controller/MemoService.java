@@ -54,4 +54,12 @@ public class MemoService {
         memo.update(dto.getTitle(), dto.getContent());
         return new MemoResponseDto(memo.getId(), memo.getTitle(), memo.getContent());
     }
+
+    @Transactional
+    public void deleteById(Long id) {
+        if (!memoRepository.existsById(id)) {
+            throw new IllegalArgumentException("삭제하려는 id의 메모가 없습니다.");
+        }
+        memoRepository.deleteById(id);
+    }
 }
